@@ -5,12 +5,10 @@ from dtapp.main import app
 from dtapp.services.slack_service import slack_client
 from dtapp.views.tenant_access import update_tenant_access, get_tenant_access, create_tenant_access
 
+# Real approver roster redacted for the public repo — populate with your own.
 AUTHORIZED_APPROVERS = {
-    'alokg@drivetrain.ai',
-    'tark@drivetrain.ai',
-    'paaras@drivetrain.ai',
-    'saurav@drivetrain.ai',
-    'jason@drivetrain.ai',
+    'approver1@example.com',
+    'approver2@example.com',
 }
 
 
@@ -163,11 +161,11 @@ def handle_request_access_command(payload):
                     "type": "input",
                     "block_id": "user_email_block",
                     "label": {"type": "plain_text", "text": "User Email"},
-                    "hint": {"type": "plain_text", "text": "Only @drivetrain.ai addresses are accepted."},
+                    "hint": {"type": "plain_text", "text": "Only @example.com addresses are accepted."},
                     "element": {
                         "type": "plain_text_input",
                         "action_id": "user_email",
-                        "placeholder": {"type": "plain_text", "text": "user@drivetrain.ai"},
+                        "placeholder": {"type": "plain_text", "text": "user@example.com"},
                     },
                 },
                 {
@@ -231,8 +229,8 @@ def handle_modal_submission(payload):
     reason = state_values['reason_block']['reason']['value']
 
     errors = {}
-    if not user_email.endswith('@drivetrain.ai'):
-        errors['user_email_block'] = "Email must be a @drivetrain.ai address."
+    if not user_email.endswith('@example.com'):
+        errors['user_email_block'] = "Email must be a @example.com address."
     if len(reason.strip()) < 20:
         errors['reason_block'] = "Reason must be at least 20 characters."
     if errors:

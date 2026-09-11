@@ -100,14 +100,14 @@ class KickstartSettings(BaseSettings):
     # client instead, configured per-tool in the access_tool_matrix.client_config JSONB column rather
     # than as individual settings fields here — see access/clients/scim_client.py). Blank → dry-run.
     github_api_token: str = ""
-    github_org: str = "DrivetrainAi"
+    github_org: str = "YOUR_GITHUB_ORG"
 
-    # Corporate Okta (drivetrain.okta.com) — DISTINCT from the customer-facing product Okta
-    # (constants.DRIVETRAIN_OKTA / OKTA_API_TOKEN used by views/okta.py for per-tenant customer SSO).
+    # Corporate Okta (your-corp.okta.com) — DISTINCT from the customer-facing product Okta
+    # (constants.PRODUCT_OKTA / OKTA_API_TOKEN used by views/okta.py for per-tenant customer SSO).
     # "Drivetrain" access for an employee (per this team's own convention — "Okta and Drivetrain are
     # the same") means corporate Okta group membership, granted via the Users/Groups API. Blank → dry-run.
     okta_corp_api_token: str = ""
-    okta_corp_base_url: str = "https://drivetrain.okta.com"
+    okta_corp_base_url: str = "https://your-corp.okta.com"
     okta_corp_drivetrain_group_id: str = ""  # the Okta group whose membership = "has Drivetrain access"
 
     # Bespoke clients (dtapp/access/clients/) — one settings block per tool below. Every field blank →
@@ -167,13 +167,13 @@ class KickstartSettings(BaseSettings):
 
     # GCP IAM — engineers only ever get GCP access on staging + preprod, never prod. ONE credential
     # covers everything (grant on staging+preprod, AND the revoke-side dynamic sweep across every
-    # project it can see) — consolidated 2026-09-07 after finding drive-backend@composed-strata-301915
+    # project it can see) — consolidated 2026-09-07 after finding the GCP IAM service account
     # already has real, standing access to both staging/preprod plus ~40 other projects (no org-level
     # grant needed; whoever set this SA up already added it project-by-project). Distinct from
     # google_service_account_json (BigQuery/Workspace, a different, narrower-scoped identity).
     gcp_iam_service_account_json: str = ""
-    gcp_project_id: str = ""              # drivetrain-staging
-    gcp_preprod_project_id: str = ""      # drivetrain-preprod
+    gcp_project_id: str = ""              # your-project-staging
+    gcp_preprod_project_id: str = ""      # your-project-preprod
     gcp_default_role: str = "roles/viewer"
 
     # Access-automation Slack channel overrides (PROD only — see access/recipients.py; non-prod always

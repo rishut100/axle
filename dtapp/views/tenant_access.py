@@ -8,7 +8,7 @@ from dtapp.services.email_service import (
 from dtapp.services.slack_service import post_tenant_access_request
 from dtapp.views.bigquery_access import request_dtx_springs_bq_access
 
-EU_AXLE_BASE_URL = "https://admin.eu.drivetrain.ai"
+EU_AXLE_BASE_URL = "https://admin.eu.example.internal"
 
 
 def _is_eu_tenant(tenant_id):
@@ -39,7 +39,7 @@ def _db_query(query, update=False, v3=False):
 
 def _retool_link(id, v3=False):
     app_name = "tenant_access_v3" if v3 else "tenant_access"
-    return f"https://drivetrain.retool.com/app/{app_name}#id={id}"
+    return f"https://your-retool-domain.retool.com/app/{app_name}#id={id}"
 
 
 def validate_tenant_information(tenant_id, v3=False):
@@ -178,7 +178,7 @@ def create_tenant_access(tenant_id, user_email, validity, reason, v3=False):
             is_auto_approve = (int(tenant_id) > 1000 and int(tenant_id) < 5000) or ((validate_validity(validity) and validate_reason(reason)) and (qry_result["user_email"] in leads_list))
             if is_auto_approve:
                 app.logger.info("Tenant access request is for > 1000 tenant or by the leads. Going with auto approval")
-                update_tenant_access(result["id"], 1, "auto_approval@drivetrain.ai", v3=v3)
+                update_tenant_access(result["id"], 1, "auto_approval@example.com", v3=v3)
                 return result_list
 
             else:

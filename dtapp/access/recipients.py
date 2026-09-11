@@ -2,7 +2,7 @@
 switch point. PROD channel ids are NOT hardcoded here (unlike kickstart's Recipients, which hardcodes
 real channel/team ids because those channels already existed) — the #access-automation-* Slack channels
 this module needs don't exist yet, so PROD values come from settings (env vars), configured once those
-channels are created. NON-prod always routes to the existing Shahbaz dev-test channel (same one
+channels are created. NON-prod always routes to the existing dev-test channel (same one
 kickstart uses), so a staging/dev run never posts anywhere real regardless of settings.
 """
 import logging
@@ -12,13 +12,14 @@ from dtapp.garage.core.config import settings
 
 logger = logging.getLogger(__name__)
 
-_SHAHBAZ_DEV_TEST_CHANNEL = "C0B99N8AVFZ"  # #shahbaz-dev-test (same non-prod catch-all kickstart uses)
+# Real Linear/Slack ids below are placeholders for the public repo — replace with your own.
+_DEV_TEST_CHANNEL = "C00000001"  # #dev-test (same non-prod catch-all kickstart uses)
 
 # Fallback Linear team/state for manual-tool sub-issues when a ToolMatrixEntry doesn't specify one —
 # reuses kickstart's non-prod "Eng Dev Testing" bucket outside prod so nothing dev-created ever lands
 # in a real team's backlog by accident.
-_ENG_DEV_TESTING_TEAM = "2ef1b4b0-6c41-4f0e-9832-66b70028d3fe"
-_ENG_DEV_TESTING_TODO = "598a4647-2a56-40f2-a7f4-a493c17b5748"
+_ENG_DEV_TESTING_TEAM = "00000000-0000-0000-0000-000000000002"
+_ENG_DEV_TESTING_TODO = "00000000-0000-0000-0000-00000000000e"
 
 
 @dataclass(frozen=True)
@@ -51,9 +52,9 @@ if settings.is_prod:
     )
 else:
     recipients = Recipients(
-        notify_channel=_SHAHBAZ_DEV_TEST_CHANNEL,
-        logs_channel=_SHAHBAZ_DEV_TEST_CHANNEL,
-        drift_alert_channel=_SHAHBAZ_DEV_TEST_CHANNEL,
+        notify_channel=_DEV_TEST_CHANNEL,
+        logs_channel=_DEV_TEST_CHANNEL,
+        drift_alert_channel=_DEV_TEST_CHANNEL,
         default_linear_team=_ENG_DEV_TESTING_TEAM,
         default_linear_state=_ENG_DEV_TESTING_TODO,
     )

@@ -106,30 +106,10 @@ dictConfig({
 })
 app_env = os.environ.get('DTADMIN_ENV')
 
+# Real employee roster redacted for the public repo — populate with your own.
 leads_list = [
-    "sparsh@drivetrain.ai",
-    "kabilan@drivetrain.ai",
-    "piyush@drivetrain.ai",
-    "sateesh@drivetrain.ai",
-    "nikhil@drivetrain.ai",
-    "gagan@drivetrain.ai",
-    "neeraz@drivetrain.ai",
-    "vikrant@drivetrain.ai",
-    "tushar@drivetrain.ai",
-    "praneeth@drivetrain.ai",
-    "robin@drivetrain.ai",
-    "udit@drivetrain.ai",
-    "manav@drivetrain.ai",
-    "irfan@drivetrain.ai",
-    "lomash@drivetrain.ai",
-    "pawan@drivetrain.ai",
-    "kartikey@drivetrain.ai",
-    "arpit@drivetrain.ai",
-    "chandan@drivetrain.ai",
-    "chitranshu@drivetrain.ai",
-    "jeet@drivetrain.ai",
-    "darshan@drivetrain.ai",
-    "ankit.g@drivetrain.ai"
+    "lead1@example.com",
+    "lead2@example.com",
 ]
 
 # --------------------------------------------

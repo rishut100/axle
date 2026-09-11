@@ -64,7 +64,7 @@ class GitHubClient:
     def _find_username(self, email: str) -> str:
         """Resolve email -> real GitHub login by matching against the actual org member list, instead
         of guessing (an earlier version just used the email local-part verbatim, which is WRONG — this
-        org's members are `<name>-dt`, e.g. shaswat@drivetrain.ai -> shaswat-dt, not `shaswat`; that
+        org's members are `<name>-dt`, e.g. jdoe@example.com -> jdoe-dt, not `jdoe`; that
         guess caused a real 404 on a live offboard). Exact match first, then a unique `<local>-*` login
         (the observed company convention); raises loudly on no/ambiguous match rather than silently
         guessing wrong again — a failed step is safer than a wrong one for a revoke."""

@@ -52,7 +52,7 @@
                 "KEKA_API_KEY": "",
                 "KEKA_API_BASE_URL": "https://api.keka.com",
                 "GITHUB_API_TOKEN": "",
-                "GITHUB_ORG": "sethis",
+                "GITHUB_ORG": "",
                 "ACCESS_NOTIFY_CHANNEL": "",
                 "ACCESS_LOGS_CHANNEL": "",
                 "ACCESS_DRIFT_ALERT_CHANNEL": "",

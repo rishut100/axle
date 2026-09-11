@@ -18,11 +18,11 @@ CLEANUP_PATH = f"{KICKSTART_API_BASE}/users/cleanup"
 
 # Prod bypasses the public LB by hitting the in-cluster ingress-nginx and routing by Host header
 # (ENG-78866; see views/internal_api_check.py).
-_GC_URL = "https://400.drivetrain.ai/drive"                                            # prod (Grand Central)
+_GC_URL = "https://400.example.internal/drive"                                         # prod (Grand Central)
 _LOCAL_URL = "http://localhost:8080/drive"                                             # local dev
 _INGRESS_URL = "http://ingress-nginx-controller.ingress-nginx.svc.cluster.local:443"   # in-cluster ingress
 _GC = urllib.parse.urlparse(_GC_URL)
-# Tenant vhost domain (e.g. "drivetrain.ai"). Cleanup routes by Host: <tenantId>.<domain> so Drive's
+# Tenant vhost domain (e.g. "example.com"). Cleanup routes by Host: <tenantId>.<domain> so Drive's
 # TenantFilter resolves + sets the tenant context from the host (no body / no in-handler tenant switch).
 _TENANT_DOMAIN = _GC.netloc.split(".", 1)[1]
 
@@ -77,9 +77,9 @@ class DriveClient:
         """Synchronous demo-tenant cleanup, called inside the all-or-nothing register.
 
         POSTs the kickstart cleanup endpoint on the demo tenant's OWN vhost
-        (Host: <tenantId>.drivetrain.ai), axleApiKey-gated. Drive's TenantFilter resolves + sets the
+        (Host: <tenantId>.<domain>), axleApiKey-gated. Drive's TenantFilter resolves + sets the
         tenant context from the host (the same path every tenant request uses), then the handler
-        soft-deletes non-@drivetrain users in that tenant's schema. No body — the tenant IS the host.
+        soft-deletes non-internal users in that tenant's schema. No body — the tenant IS the host.
         Raises ServiceError on any non-2xx so the register transaction rolls back. Drive replies
         204 No Content (the soft-deleted count is logged Drive-side), so there's no body to parse.
         """

@@ -11,9 +11,9 @@ folder-level IAM inheritance is possible), and new preprod-style projects get cr
 fixed 2-project list can't guarantee a leaver's binding is actually gone everywhere it might exist.
 
 ONE credential (settings.gcp_iam_service_account_json) covers all of this — consolidated 2026-09-07
-after finding drive-backend@composed-strata-301915 already has real, standing access to staging,
-preprod, AND ~40 other projects (added project-by-project by whoever set it up, since there's no org
-to grant on). Distinct from google_service_account_json (BigQuery/Workspace, a narrower identity)."""
+after finding the existing service account already has real, standing access to staging, preprod, and
+several other projects (added project-by-project by whoever set it up, since there's no org to grant
+on). Distinct from google_service_account_json (BigQuery/Workspace, a narrower identity)."""
 import json
 import logging
 

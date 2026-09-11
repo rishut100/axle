@@ -111,8 +111,8 @@ def execute_db_backup(source_id, file_name):
 
 def execute_preprod_db_restore(source_id, destination_id, file_name):
     ret_restore = 1
-    db_name = "drivetrain_preprod_v3"
-    db_host = "rds-preprod.drivetrain.ai"
+    db_name = "product_preprod_v3"
+    db_host = "rds-preprod.example.internal"
     db_user = app.config['DRIVE_USER']
     db_password = db_pass
 
@@ -171,7 +171,7 @@ def run_dtml_backup_v2():
         if _id['tenant_id']:
 
             # Model dtml backup
-            url = f"https://{tenant_id}.drivetrain.ai/drive/api/v1/public/dtml/model"
+            url = f"https://{tenant_id}.example.com/drive/api/v1/public/dtml/model"
             headers = {
                 "Content-Type": "application/json",
                 "apikey": key
@@ -220,7 +220,7 @@ def run_dtml_backup_v3():
         if _id['tenant_id']:
 
             # Model dtml backup
-            url = f"https://{tenant_id}.drivetrain.ai/drive/api/v1/public/dtml/model"
+            url = f"https://{tenant_id}.example.com/drive/api/v1/public/dtml/model"
             headers = {
                 "Content-Type": "application/json",
                 "apikey": key

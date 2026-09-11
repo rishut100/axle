@@ -227,7 +227,7 @@ def create_dataset(dataset_name):
 
 
 def check_liquibase_restart():
-    action_url = f"https://api.github.com/repos/DrivetrainAi/drive/actions/workflows/prod-liquibase-restart.yml/runs"
+    action_url = f"https://api.github.com/repos/YOUR_GITHUB_ORG/drive/actions/workflows/prod-liquibase-restart.yml/runs"
     _headers = {'Authorization': f'token {git_token}', 'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28'}
     
     r = requests.get(action_url, headers=_headers)
@@ -243,7 +243,7 @@ def check_liquibase_restart():
 
 
 def check_liquibase_migration():
-    action_url = f"https://api.github.com/repos/DrivetrainAi/drive/actions/workflows/prod-liquibase-deployment.yml/runs"
+    action_url = f"https://api.github.com/repos/YOUR_GITHUB_ORG/drive/actions/workflows/prod-liquibase-deployment.yml/runs"
     _headers = {'Authorization': f'token {git_token}', 'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28'}
     
     r = requests.get(action_url, headers=_headers)
@@ -259,7 +259,7 @@ def check_liquibase_migration():
 
 
 def run_liquibase_restart():
-    action_url = f"https://api.github.com/repos/DrivetrainAi/drive/actions/workflows/production-v3-liquibase-restart.yml/dispatches"
+    action_url = f"https://api.github.com/repos/YOUR_GITHUB_ORG/drive/actions/workflows/production-v3-liquibase-restart.yml/dispatches"
     _headers = {'Authorization': f'token {git_token}', 'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28'}
     _data = '{"ref": "main-v3"}'
     
@@ -300,12 +300,12 @@ def sandbox_exists(tenant_id):
     
 
 def add_okta_trusted_origin(tenant_id):
-    okta_domain_url = "auth.drivetrain.ai"
+    okta_domain_url = "auth.example-corp.okta.com"
     url = f"https://{okta_domain_url}/api/v1/trustedOrigins"
 
     payload = {
     "name": f"T-{tenant_id}",
-    "origin": f"https://{tenant_id}.drivetrain.ai",
+    "origin": f"https://{tenant_id}.example.com",
     "scopes": [
         {
         "type": "CORS"

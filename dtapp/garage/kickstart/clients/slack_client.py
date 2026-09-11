@@ -172,7 +172,7 @@ class SlackClient:
         is UI-only. A link is mandatory; fall back to a placeholder anchor."""
         if self._require_token():
             return self._dryrun("bookmarks.add", {"channel_id": channel_id, "title": title, "link": link})
-        payload = {"channel_id": channel_id, "title": title, "type": "link", "link": link or "https://drivetrain.ai"}
+        payload = {"channel_id": channel_id, "title": title, "type": "link", "link": link or "https://example.com"}
         if emoji:
             payload["emoji"] = emoji
         body = self._post("bookmarks.add", payload)

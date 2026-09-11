@@ -20,30 +20,15 @@ from dtapp.services.email_service import (
 )
 from dtapp.views.common_functions import log_exception
 
+# Real admin roster redacted for the public repo — populate with your own.
 ADMIN_EMAIL_DENYLIST = {
-    "rishu@drivetrain.ai",
-    "tark@drivetrain.ai",
-    "kabilan@drivetrain.ai",
-    "sateesh@drivetrain.ai"
+    "admin1@example.com",
+    "admin2@example.com",
 }
 
+# Real GCP project id map redacted for the public repo — populate with your own.
 PROJECT_ID_MAP = {
-    "Composed Strata": "composed-strata-301915",
-    "Drivetrain Staging": "drivetrain-staging",
-    "Drivetrain Preprod": "drivetrain-preprod",
-    "Dtx Springs": "dtx-springs",
-    # "Drive V2": "drive-v2-466113",
-    # "Drive V3": "drive-v3-466113",
-    # "Drivetrain Integration": "drivetrainintergation",
-    # "Radiator Springs": "radiator-springs",
-    # "Radiator Springs V3": "radiator-springs-v3",
-    # "Cold Springs": "cold-springs-475107",
-    # "Ipaas": "ipaas-466114",
-    # "Lmt Springs": "lmt-springs",
-    # "Middle Earth": "middle-earth-451206",
-    # "Preprod Dtx Springs": "preprod-dtx-springs",
-    # "Warm Springs": "warm-springs-464304",
-    # "Test Express": "automation-report-db"
+    "Example Project": "example-gcp-project-id",
 }
 
 
@@ -165,9 +150,9 @@ def revoke_ds_acl_access(project_id: str, tenant_id: str, email: str):
             if not (
                 e.entity_type == entity_type
                 and e.entity_id == email
-                and e.entity_id.lower().endswith("@drivetrain.ai")
+                and e.entity_id.lower().endswith("@example.com")
             )
-        ]  # extra check on the email to check it does not end with drivetrain.ai
+        ]  # extra check on the email to check it does not end with the internal domain
         if len(entries) == before:
             app.logger.info(f"[SKIP] {ds_id}: no ACL entry for {email}")
             continue
@@ -331,7 +316,7 @@ def request_bq_access(payload):
             fetch=False,
         )
         if (expires_at - datetime.utcnow()) <= timedelta(days=1):
-            record["approved_by"] = "auto_approval@drivetrain.ai"
+            record["approved_by"] = "auto_approval@example.com"
             return approve_bq_access(record["request_id"], record["approved_by"])
         else:
             send_bigquery_access_approval_mail(
@@ -495,7 +480,7 @@ def request_dtx_springs_bq_access(payload, auto_approve=False):
         )
 
         if auto_approve:
-            record["approved_by"] = "auto_approval@drivetrain.ai"
+            record["approved_by"] = "auto_approval@example.com"
             approve_dtx_springs_bq_access(
                 record["request_id"],
                 record["project_id"],

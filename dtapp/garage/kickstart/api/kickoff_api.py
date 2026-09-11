@@ -178,7 +178,7 @@ def kickstart_intake_validate(token):
     k = kickoff_repo.get_kickoff(koid)
     flat = flatten_groups(k.data)
     # onboarding_contact_name = the contact the intake link was addressed to; the form greets this person.
-    # requires_eu_hosting (AE-set at register) → the intake form renders the .eu.drivetrain.ai suffix.
+    # requires_eu_hosting (AE-set at register) → the intake form renders the .eu.example.com suffix.
     return {'state': state, 'company_name': flat.get('company_name'),
             'onboarding_contact_name': flat.get('onboarding_contact_name'),
             'requires_eu_hosting': flat.get('requires_eu_hosting'), 'koid': koid}, 200

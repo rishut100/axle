@@ -1,4 +1,4 @@
-"""Corporate Okta (drivetrain.okta.com) — the client behind the "Drivetrain" matrix row. Per this
+"""Corporate Okta (your-corp.okta.com) — the client behind the "Drivetrain" matrix row. Per this
 team's own convention (Slack: "Is Okta and Drivetrain not the same? ... They both same"), granting an
 employee "Drivetrain" access means adding them to the corporate Okta group that fronts SSO into the
 internal Drivetrain admin tools — this is a real, scriptable Okta Users/Groups API call, not a manual

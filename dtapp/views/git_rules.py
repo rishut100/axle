@@ -1,11 +1,11 @@
 from dtapp.main import *
 from dtapp.services.email_service import send_email_query_html_mail, send_git_repo_creation_email
 
-REPO_ADMINS = ["kabilan-dt", "rishu-dt", "guru-dt"]
+REPO_ADMINS = ["admin-user-1", "admin-user-2", "admin-user-3"]
 TAP_TEAM_SLUG = "data-platform"
 ENGINEERING_TEAM_SLUG = "engineering"
-git_api_url = "https://api.github.com/repos/DrivetrainAi"
-git_orgs_api_url = "https://api.github.com/orgs/DrivetrainAi"
+git_api_url = "https://api.github.com/repos/YOUR_GITHUB_ORG"
+git_orgs_api_url = "https://api.github.com/orgs/YOUR_GITHUB_ORG"
 headers = {
     "Authorization": f"Bearer {git_token}",
     "Accept": "application/vnd.github+json",
@@ -162,7 +162,7 @@ def add_collaborator_write_access(repo_name, username):
 
 
 def add_team_write_access(repo_name, team_slug):
-    url = f"{git_orgs_api_url}/teams/{team_slug}/repos/DrivetrainAi/{repo_name}"
+    url = f"{git_orgs_api_url}/teams/{team_slug}/repos/YOUR_GITHUB_ORG/{repo_name}"
     response = requests.put(url, headers=headers, data=json.dumps({"permission": "push"}))
     if response.status_code not in (200, 201, 204):
         app.logger.error(f"Failed to add {team_slug} team to {repo_name}: {response.status_code}")
@@ -231,4 +231,4 @@ def create_git_repo(repo_name, initiated_by, branch_name, collaborators=None, te
     success_msg = f"Repository '{repo_name}' created successfully with '{branch_name}' as default branch and protection rules applied"
     app.logger.info(success_msg)
     _notify(repo_name, initiated_by, success=True, message=success_msg)
-    return {"message": success_msg, "repo_name": repo_name, "repo_url": f"https://github.com/DrivetrainAi/{repo_name}"}, 201
+    return {"message": success_msg, "repo_name": repo_name, "repo_url": f"https://github.com/YOUR_GITHUB_ORG/{repo_name}"}, 201

@@ -89,7 +89,7 @@ def api_get_pending_bq_access():
             """
         )
         for x in result:
-            x['link'] = f"https://drivetrain.retool.com/app/bigquery_access#id={x['request_id']}"
+            x['link'] = f"https://your-retool-domain.retool.com/app/bigquery_access#id={x['request_id']}"
         return jsonify(result), 200
     except Exception as e:
         log_exception(e, 400)

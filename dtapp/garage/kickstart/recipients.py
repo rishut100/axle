@@ -1,8 +1,8 @@
 """Env-resolved routing + base URLs for kickoff side-effects — the Linear teams + assignees, the
 assign-DM recipient, the requisition-email CC, and the Garage FE base URL (intake form + kickoff
 deep-links). PROD targets the real people/buckets; every NON-prod env (dev/staging/preprod) routes to
-Shahbaz + the 'Eng Dev Testing' Linear bucket, so staging/dev never ping real folks. Single switch
-point: `recipients = _PROD if settings.is_prod else _NONPROD`."""
+a fixed dev-safety-net identity + the 'Eng Dev Testing' Linear bucket, so staging/dev never ping real
+folks. Single switch point: `recipients = _PROD if settings.is_prod else _NONPROD`."""
 from dataclasses import dataclass
 
 from dtapp.garage.core.config import settings
@@ -14,11 +14,11 @@ class Recipients:
     connectors_team: str      # Linear team for the per-connector issues
     connector_state_id: str   # per-connector issues open in this state ("Todo now")
     kickoff_state_id: str     # Kickoff-team "Todo" — every kickoff sub-issue + academy issue opens here
-    linear_jason: str         # most kickoff sub-issues assignee (Jason in prod)
-    linear_fauzan: str        # support-bot + master-sheet sub-issues (Fauzan in prod)
-    linear_praneeth: str      # per-connector assignee (Praneeth in prod)
-    linear_ankit: str         # "verify external channel on Heimdall" assignee (Ankit G in prod)
-    linear_wayne: str         # academy-access-request assignee (Wayne in prod)
+    linear_jason: str         # most kickoff sub-issues assignee (name redacted for public repo)
+    linear_fauzan: str        # support-bot + master-sheet sub-issues (name redacted for public repo)
+    linear_praneeth: str      # per-connector assignee (name redacted for public repo)
+    linear_ankit: str         # "verify external channel on Heimdall" assignee (name redacted for public repo)
+    linear_wayne: str         # academy-access-request assignee (name redacted for public repo)
     marketing_team: str       # Linear team for the Academy access request (Marketing / MARKT- in prod)
     marketing_state_id: str   # Marketing-team "Todo" — the Academy access request opens here
     paaras_slack_id: str      # "assign a consultant" DM recipient
@@ -32,58 +32,59 @@ class Recipients:
     logs_channel: str               # central "Kickstart Logs" channel (step-failure alerts)
 
 
-# Shahbaz — the catch-all identity for every non-prod env.
-_SHAHBAZ_LINEAR = "7458f8e6-96e7-4006-81a1-9b3a8c8319f0"
-_SHAHBAZ_SLACK = "U09LWQNG0S0"
-_ENG_DEV_TESTING_TEAM = "2ef1b4b0-6c41-4f0e-9832-66b70028d3fe"  # non-prod Linear bucket "Eng Dev Testing"
+# The fixed dev-safety-net identity — catch-all for every non-prod env.
+# Real Linear/Slack ids + employee email addresses below are placeholders for the public repo — replace with your own.
+_SHAHBAZ_LINEAR = "00000000-0000-0000-0000-000000000001"
+_SHAHBAZ_SLACK = "U00000001"
+_ENG_DEV_TESTING_TEAM = "00000000-0000-0000-0000-000000000002"  # non-prod Linear bucket "Eng Dev Testing"
 
 _PROD = Recipients(
-    linear_team="3dba2e06-7e4c-4178-ab7f-eae8b27beee8",         # team "Kickoff" (KIC-)
-    connectors_team="ae89b650-dae4-4d26-ac52-d32751454be0",     # team "Connectors" (CON2-)
-    connector_state_id="d8cb1581-49b2-4609-afd6-8e8cba417d4b",  # CON2 "Todo now"
-    kickoff_state_id="b7728b8a-65e1-4fa8-89e9-010e79018818",    # Kickoff team "Todo"
-    linear_jason="9050388b-a439-4194-a841-bb55187f438b",
-    linear_fauzan="3838b29f-f7c2-4206-aff8-8261d6b0f4e3",   # Fauzan Khan (fauzan@drivetrain.ai)
-    linear_praneeth="320680ba-584c-4f36-aa8f-ff4c324a7253",
-    linear_ankit="1321a50f-0fc4-4405-b721-cefe2d322842",    # Ankit G (ankit.g@drivetrain.ai)
-    linear_wayne="e5d2e6b1-bfe3-42ad-af6f-495699185c9f",    # Wayne (wayne@drivetrain.ai)
-    marketing_team="9e05273c-f919-466f-878e-7c3fd6d4fc97",       # team "Marketing" (MARKT-)
-    marketing_state_id="b3498283-239f-462a-bb8d-44c577cd13c3",   # Marketing team "Todo"
-    paaras_slack_id="U038LS7JV1P",  # Paaras Sharma (paaras@drivetrain.ai)
-    announce_channel="C07ER1S9Z8Q",  # #gtm-process-commercial-kickoff (private)
-    # Paaras, Mona, Jason, Fauzan — @-mentioned in the GTM "new signing" post.
-    gtm_notify_slack_ids=("U038LS7JV1P", "U077A936YTV", "U07UN8HS05T", "U09G8H2B1R7"),
-    requisition_cc=("onboarding@drivetrain.ai",),  # + the AE (registered_by), CC'd dynamically
-    # Standing members auto-added to every internal Slack channel: Alok, Tark, Saurav, Paaras, Jason,
-    # Fauzan, Praneeth, Chitranshu, Chandan (+ the AE, added dynamically).
-    slack_channel_members=("U01NCQ1Q2AC", "U01HFHS7NKF", "U01P7LH8DS5", "U038LS7JV1P", "U07UN8HS05T",
-                           "U09G8H2B1R7", "U086W1BQJD7", "U0BBD3090G0", "U07UPC4CHBL"),
-    monday_workspace_owners=("paaras@drivetrain.ai", "jason@drivetrain.ai", "ankit.g@drivetrain.ai"),
-    form_base_url="https://garage.drivetrain.ai/app",
-    notify_channel="C0BS2NBQDK7",   # #kickstart-notifications
-    logs_channel="C0BS2NMJ1S9",     # #kickstart-logs
+    linear_team="00000000-0000-0000-0000-000000000003",         # team "Kickoff" (KIC-)
+    connectors_team="00000000-0000-0000-0000-000000000004",     # team "Connectors" (CON2-)
+    connector_state_id="00000000-0000-0000-0000-000000000005",  # CON2 "Todo now"
+    kickoff_state_id="00000000-0000-0000-0000-000000000006",    # Kickoff team "Todo"
+    linear_jason="00000000-0000-0000-0000-000000000007",
+    linear_fauzan="00000000-0000-0000-0000-000000000008",   # name redacted for public repo
+    linear_praneeth="00000000-0000-0000-0000-000000000009",
+    linear_ankit="00000000-0000-0000-0000-00000000000a",    # name redacted for public repo
+    linear_wayne="00000000-0000-0000-0000-00000000000b",    # name redacted for public repo
+    marketing_team="00000000-0000-0000-0000-00000000000c",       # team "Marketing" (MARKT-)
+    marketing_state_id="00000000-0000-0000-0000-00000000000d",   # Marketing team "Todo"
+    paaras_slack_id="U00000002",  # name redacted for public repo
+    announce_channel="C00000001",  # #gtm-process-commercial-kickoff (private)
+    # Names redacted for the public repo — @-mentioned in the GTM "new signing" post.
+    gtm_notify_slack_ids=("U00000002", "U00000003", "U00000004", "U00000005"),
+    requisition_cc=("onboarding-team@example.com",),  # + the AE (registered_by), CC'd dynamically
+    # Standing members auto-added to every internal Slack channel (names redacted for public repo)
+    # + the AE, added dynamically.
+    slack_channel_members=("U00000006", "U00000007", "U00000008", "U00000002", "U00000004",
+                           "U00000005", "U00000009", "U0000000a", "U0000000b"),
+    monday_workspace_owners=("owner1-team@example.com", "owner2-team@example.com", "owner3-team@example.com"),
+    form_base_url="https://garage.example.com/app",
+    notify_channel="C00000002",   # #kickstart-notifications
+    logs_channel="C00000003",     # #kickstart-logs
 )
 _NONPROD = Recipients(
     linear_team=_ENG_DEV_TESTING_TEAM,
     connectors_team=_ENG_DEV_TESTING_TEAM,
-    connector_state_id="598a4647-2a56-40f2-a7f4-a493c17b5748",  # Eng Dev Testing "Todo"
-    kickoff_state_id="598a4647-2a56-40f2-a7f4-a493c17b5748",    # Eng Dev Testing "Todo"
+    connector_state_id="00000000-0000-0000-0000-00000000000e",  # Eng Dev Testing "Todo"
+    kickoff_state_id="00000000-0000-0000-0000-00000000000e",    # Eng Dev Testing "Todo"
     linear_jason=_SHAHBAZ_LINEAR,
     linear_fauzan=_SHAHBAZ_LINEAR,
     linear_praneeth=_SHAHBAZ_LINEAR,
     linear_ankit=_SHAHBAZ_LINEAR,
     linear_wayne=_SHAHBAZ_LINEAR,
     marketing_team=_ENG_DEV_TESTING_TEAM,
-    marketing_state_id="598a4647-2a56-40f2-a7f4-a493c17b5748",  # Eng Dev Testing "Todo"
+    marketing_state_id="00000000-0000-0000-0000-00000000000e",  # Eng Dev Testing "Todo"
     paaras_slack_id=_SHAHBAZ_SLACK,
-    announce_channel="C0B99N8AVFZ",  # #shahbaz-dev-test
+    announce_channel="C00000004",  # #dev-test (non-prod catch-all channel)
     gtm_notify_slack_ids=(_SHAHBAZ_SLACK,),
-    requisition_cc=("shahbaz@drivetrain.ai",),
-    slack_channel_members=(_SHAHBAZ_SLACK,),  # non-prod: only Shahbaz — never ping real folks
-    monday_workspace_owners=("shahbaz@drivetrain.ai",),
+    requisition_cc=("dev-team@example.com",),
+    slack_channel_members=(_SHAHBAZ_SLACK,),  # non-prod: only the dev safety-net identity — never ping real folks
+    monday_workspace_owners=("dev-team@example.com",),
     form_base_url="http://localhost:5173",
-    notify_channel="C0B99N8AVFZ",   # #shahbaz-dev-test (Shahbaz Dev)
-    logs_channel="C0B99N8AVFZ",     # #shahbaz-dev-test (Shahbaz Dev)
+    notify_channel="C00000004",   # #dev-test (non-prod catch-all channel)
+    logs_channel="C00000004",     # #dev-test (non-prod catch-all channel)
 )
 
 recipients = _PROD if settings.is_prod else _NONPROD

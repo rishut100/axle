@@ -13,7 +13,7 @@ TESTING = False
 THREADS_PER_PAGE = 2
 
 # Secret key for signing cookies
-SECRET_KEY = 'dtadminapp2022'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-only-insecure-key')
 
 # CORS content type
 CORS_HEADERS = 'Content-Type'
@@ -23,18 +23,18 @@ CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
 
 # AWS Constants
-AWS_SECRET_NAME = "gcp-key"
-GLOBAL_KEY_SECRET_NAME = "staging-drive-secrets"
+AWS_SECRET_NAME = "REPLACE_WITH_SECRET_NAME"
+GLOBAL_KEY_SECRET_NAME = "REPLACE_WITH_SECRET_NAME"
 AWS_REGION = "us-east-1"
 
 # Drive db details
-DRIVE_DB = "drivetrain_stagingv2"
-DRIVE_HOST = "rds-staging.drivetrain.ai"
+DRIVE_DB = "product_stagingv2"
+DRIVE_HOST = "rds-staging.example.internal"
 DRIVE_USER = "drive"
 DRIVE_PORT = "5432"
 
-DRIVE_V3_DB = "drivetrain_stagingv2"
-DRIVE_V3_HOST = "rds-staging.drivetrain.ai"
+DRIVE_V3_DB = "product_stagingv2"
+DRIVE_V3_HOST = "rds-staging.example.internal"
 DRIVE_V3_PORT = "5432"
 
 # GCP access DB details

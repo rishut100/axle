@@ -37,7 +37,7 @@ def _cleanup_demo_users(koid, data):
 
 def _sim_linear_url(koid, suffix="", prefix="KIC") -> str:
     """Single source for dry-run (no-key) simulated Linear issue URLs."""
-    return f"https://linear.app/drivetrain/issue/{prefix}-SIM-{koid}" + (f"-{suffix}" if suffix else "")
+    return f"https://linear.app/your-workspace/issue/{prefix}-SIM-{koid}" + (f"-{suffix}" if suffix else "")
 
 
 def _kickoff_desc(koid, data, tenant_id=None, channel_name=None) -> str:
@@ -111,7 +111,7 @@ _KICKOFF_SUBISSUES = [
     (_DECK_SUBISSUE_TITLE,
      "Create a copy of the kickoff deck and update it for this customer.\n\n"
      "Then bookmark on the int slack channel\n\n"
-     "Template: https://docs.google.com/presentation/d/1StzpWQPHzitKw67H8DFGcncDkHlGlanY2pS9DHx0PmQ/edit",
+     "Template: https://docs.google.com/presentation/d/1XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/edit",
      recipients.linear_jason),
     ("Make sure the consultant is added to the external channel",
      "Once the consultant is assigned, make sure they're added to the external customer channel.",

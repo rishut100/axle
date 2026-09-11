@@ -3,8 +3,8 @@ from dtapp.views.common_functions import log_exception
 from datetime import timedelta
 
 # Google Sheets configuration
-GOOGLE_SHEET_ID = os.getenv("GOOGLE_SHEET_ID", "12RwT-xCtOP4g0T2jlW0zGs33Xj_ydiWvnLaJKHSjUtk")
-GOOGLE_SHEET_URL = os.getenv("GOOGLE_SHEET_URL", "https://docs.google.com/spreadsheets/d/12RwT-xCtOP4g0T2jlW0zGs33Xj_ydiWvnLaJKHSjUtk/edit?usp=sharing")
+GOOGLE_SHEET_ID = os.getenv("GOOGLE_SHEET_ID", "")
+GOOGLE_SHEET_URL = os.getenv("GOOGLE_SHEET_URL", "")
 GOOGLE_SHEET_NAME = os.getenv("GOOGLE_SHEET_NAME", "Sheet1")
 
 

@@ -6,10 +6,10 @@ okta_api_key = os.environ.get('OKTA_API_TOKEN')
 
 
 def get_okta_user_groups(user_id: int):
-    fetch_user_group_url = f"{DRIVETRAIN_OKTA}/users/{user_id}/groups"
+    fetch_user_group_url = f"{PRODUCT_OKTA}/users/{user_id}/groups"
     headers = {'Accept': 'application/json',
                'Content-Type': 'application/json',
-               'Authorization': 'SSWS 00H0hwm1p75E63SyN6geoxlIQXYkstM7h-dEQC2uio'}
+               'Authorization': f'SSWS {okta_api_key}'}
 
     group_ids = requests.get(url=fetch_user_group_url, headers=headers).json()
 
@@ -43,7 +43,7 @@ def okta_password_reset(event_data):
     tenant = ""
 
     # Getting tenant from group details
-    url = f"{DRIVETRAIN_OKTA}/users/{user_id}/groups"
+    url = f"{PRODUCT_OKTA}/users/{user_id}/groups"
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"SSWS {okta_api_key}"

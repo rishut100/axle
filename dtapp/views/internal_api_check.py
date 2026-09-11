@@ -3,14 +3,14 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import urllib.parse
 
 ENDPOINTS_TO_CHECK = [
-    "https://200.drivetrain.ai/drive/api/v1/public/plans",
-    "https://200.drivetrain.ai/drive/api/v1/health/status",
+    "https://200.example.internal/drive/api/v1/public/plans",
+    "https://200.example.internal/drive/api/v1/health/status",
 
-    "https://400.drivetrain.ai/drive/api/v1/health/status",
-    "https://400.drivetrain.ai/drive/api/v1/public/plans",
-    "https://400.drivetrain.ai/drive/api/v1/internal/elasticsearch/keys",
-    "https://400.drivetrain.ai/drive/api/v1/internal/bigquery/execute",
-    "https://400.drivetrain.ai/drive/api/v1/internal/launchdarkly/enabled?flag=resetTenant",
+    "https://400.example.internal/drive/api/v1/health/status",
+    "https://400.example.internal/drive/api/v1/public/plans",
+    "https://400.example.internal/drive/api/v1/internal/elasticsearch/keys",
+    "https://400.example.internal/drive/api/v1/internal/bigquery/execute",
+    "https://400.example.internal/drive/api/v1/internal/launchdarkly/enabled?flag=resetTenant",
 ]
 
 

@@ -34,7 +34,7 @@ def _format_validity(validity):
 def post_tenant_access_request(request_id, tenant_id, user_email, validity, reason, v3=False):
     version_label = "v3" if v3 else "v2"
     retool_app = "tenant_access_v3" if v3 else "tenant_access"
-    retool_link = f"https://drivetrain.retool.com/app/{retool_app}#id={request_id}"
+    retool_link = f"https://your-retool-domain.retool.com/app/{retool_app}#id={request_id}"
     validity_display = _format_validity(validity)
     try:
         slack_client.chat_postMessage(

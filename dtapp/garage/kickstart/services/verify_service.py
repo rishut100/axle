@@ -93,7 +93,7 @@ def _escalate(koid, data, tenant_id, subdomain):
     kickstart_url = _kickoff_detail_url(koid)
     text = (
         f":rotating_light: *Tenant verification failed* — kickoff *{koid}* ({kd.company_name})\n"
-        f"Tenant `id={tenant_id}` / `{subdomain}.drivetrain.ai` did not verify healthy after "
+        f"Tenant `id={tenant_id}` / `{subdomain}.example.com` did not verify healthy after "
         f"{VERIFY_MAX_ATTEMPTS} checks (+5/+10/+15 min).\n"
         f"{subteam}please investigate.\n"
         f"Kickstart: {kickstart_url}"

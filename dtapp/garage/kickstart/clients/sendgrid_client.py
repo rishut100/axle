@@ -13,13 +13,13 @@ from dtapp.garage.kickstart.recipients import recipients
 logger = logging.getLogger(__name__)
 
 # Shared SG base/layout template (branded shell; subject/body injected). Constant, not env — mirrors Drive's Constants.BASIC_EMAIL_TEMPLATE_ID.
-BASE_EMAIL_TEMPLATE_ID = "d-e04b5887750f4d17b24b3c9c871b230e"
+BASE_EMAIL_TEMPLATE_ID = "d-REPLACE_WITH_TEMPLATE_ID"
 # Identical subject on the invite + every reminder so Gmail threads them (with the Message-ID headers).
-_SUBJECT = "Set up your Drivetrain Workspace"
+_SUBJECT = "Set up your Workspace"
 _SEND_TIMEOUT = 15  # seconds — bound the send (urllib default = none) so a hung call can't stall the thread
 
 # Deterministic Message-IDs so a reminder's References/In-Reply-To point at the invite's id (Gmail threads them).
-_MSGID_DOMAIN = "drivetrain.ai"
+_MSGID_DOMAIN = "example.com"
 
 
 def intake_msgid(koid) -> str:

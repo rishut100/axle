@@ -47,9 +47,9 @@ def require_drivetrainer(fn):
             return {'error': 'unauthorized'}, 401
         # prefer 'email' claim; fall back to 'sub' (Okta access tokens often use sub=email)
         email = (claims.get('email') or claims.get('sub') or '').lower()
-        if not email.endswith('@drivetrain.ai'):
+        if not email.endswith('@example.com'):
             logger.warning(f"[kickstart] forbidden: principal={email!r} (claim keys: {list(claims.keys())})")
-            return {'error': 'forbidden: drivetrainers only'}, 403
+            return {'error': 'forbidden: internal employees only'}, 403
         request.principal = email
         return fn(*args, **kwargs)
     return wrapper
