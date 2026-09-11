@@ -1,0 +1,96 @@
+name: Prod EU Axle Deployment
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Docker Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+    - name: Notify slack start
+      uses: voxmedia/github-action-slack-notify-build@v1
+      with:
+        channel: deployment-notifications
+        status: STARTED
+        color: warning
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Install kubectl
+      uses: azure/setup-kubectl@v2.0
+      with:
+        version: 'v1.24.0'
+      id: install
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: eu-central-1
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+
+    - name: Build axle image
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        IMAGE_TAG: ${{ github.sha }}
+      run: |
+        echo "Build axle image..."
+        docker build -f deploy/Dockerfile -t $ECR_REGISTRY/eu-c1-axle:$IMAGE_TAG -t $ECR_REGISTRY/eu-c1-axle:latest .
+        echo "Pushing image to ECR..."
+        docker push -a $ECR_REGISTRY/eu-c1-axle
+
+    - name: Update kube config
+      run: aws eks update-kubeconfig --name ${{ secrets.EKS_EU_PROD_CLUSTER_NAME }} --region eu-central-1
+
+    - name: Deploy axle
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        IMAGE_TAG: ${{ github.sha }}
+      run: |
+        echo "Deploying..."
+        kubectl set image deployment/axle axle=$ECR_REGISTRY/eu-c1-axle:$IMAGE_TAG -n production
+        kubectl rollout status deployment/axle -n production
+        exit_code=$?
+
+        if (( $exit_code == 0 )); then
+          echo "Axle completed"
+        else
+          echo "Axle failed, exiting..."
+          exit 1
+        fi
+
+    - name: Notify slack success
+      if: success()
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
+      uses: voxmedia/github-action-slack-notify-build@v1
+      with:
+        channel: deployment-notifications
+        status: SUCCESS
+        color: good
+
+    - name: Notify slack fail
+      if: failure()
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
+      uses: voxmedia/github-action-slack-notify-build@v1
+      with:
+        channel: deployment-notifications
+        status: FAILED
+        color: danger

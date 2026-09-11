@@ -1,0 +1,26 @@
+name: Hotfix slack notification
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened,closed]
+
+jobs:
+  notify-hotfix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Confirm hotfix is validated
+        if: github.event.pull_request.merged == true
+        uses: chowdharyshivi/dt-post-hotfix-notify@main
+        with:
+          pr_title: ${{ github.event.pull_request.title }}
+          pr_url: ${{ github.event.pull_request.html_url }}
+          slack_token: ${{ secrets.SLACK_ACTIONS_TOKEN }}
+          linear_api_key: ${{ secrets.LINEAR_API_KEY }}
+          slack_channel: hotfix-verification
+          prefix: data

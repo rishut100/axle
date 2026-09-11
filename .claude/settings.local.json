@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__claude_ai_Datadog_2__search_datadog_logs",
+      "mcp__claude_ai_Datadog_2__load_datadog_skill",
+      "Bash(/tmp/axle-dryrun-venv/bin/python3 *)"
+    ]
+  }
+}

@@ -1,0 +1,66 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Admin",
+            "type": "python",
+            "request": "launch",
+            "program": "run.py",
+                "env": {
+                    "DTADMIN_ENV": "dev",
+                    "LOG_DIR": "logs"
+                },
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Python: Admin (Access Automation Test)",
+            "type": "python",
+            "request": "launch",
+            "program": "run.py",
+            "envFile": "${workspaceFolder}/.env",
+            "env": {
+                "DTADMIN_ENV": "dev",
+                "LOG_DIR": "logs",
+                "OPT_PATH": "/opt",
+                "GIT_TOKEN": "",
+                "DB_PASS": "",
+                "AWS_REGION": "us-east-1",
+                "OKTA_API_TOKEN": "",
+
+                "GARAGE_DB_HOST": "localhost",
+                "GARAGE_DB_NAME": "axle",
+                "GARAGE_DB_USER": "postgres",
+                "GARAGE_DB_PORT": "5544",
+                "GARAGE_DB_PASS": "postgres",
+                "GARAGE_SQS_ENDPOINT_URL": "",
+                "LAUNCHDARKLY_SDK_KEY": "",
+                "SENDGRID_API_KEY": "",
+                "AXLE_API_KEY": "",
+                "KICKSTART_SLACK_BOT_TOKEN": "",
+                "GARAGE_ANNOUNCE_CHANNEL": "",
+                "GARAGE_ASSIGN_NOTIFY": "",
+                "LINEAR_API_KEY": "",
+                "MONDAY_API_KEY": "",
+                "STRINGER_API_KEY": "",
+                "GOOGLE_SERVICE_ACCOUNT_JSON": "",
+                "GARAGE_S3_ENDPOINT_URL": "",
+                "GARAGE_S3_ACCESS_KEY": "",
+                "GARAGE_S3_SECRET_KEY": "",
+
+                "KEKA_WEBHOOK_SECRET": "",
+                "KEKA_API_KEY": "",
+                "KEKA_API_BASE_URL": "https://api.keka.com",
+                "GITHUB_API_TOKEN": "",
+                "GITHUB_ORG": "sethis",
+                "ACCESS_NOTIFY_CHANNEL": "",
+                "ACCESS_LOGS_CHANNEL": "",
+                "ACCESS_DRIFT_ALERT_CHANNEL": "",
+                "ACCESS_DEFAULT_LINEAR_TEAM": "",
+                "ACCESS_DEFAULT_LINEAR_STATE": ""
+            },
+            "console": "integratedTerminal",
+            "justMyCode": true
+        }
+    ]
+}
